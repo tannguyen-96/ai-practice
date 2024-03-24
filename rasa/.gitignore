@@ -1,0 +1,24 @@
+# Ignore Rasa training files
+/models/*
+
+# Ignore Rasa logs
+/logs/*
+
+# Ignore Rasa trained model files
+/train/*
+
+# Ignore Python bytecode files
+__pycache__/
+
+# Ignore Python virtual environment
+venv/
+
+# Ignore local development environment settings
+/.env
+
+# Ignore any local development files
+/local/*
+
+.obsidian
+
+.rasa

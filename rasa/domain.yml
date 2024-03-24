@@ -1,0 +1,83 @@
+version: '3.1'
+intents:
+- affirm
+- bot_challenge
+- deny
+- goodbye
+- greet
+- inquire_time
+- inquire_time_difference
+- mood_great
+- mood_unhappy
+- where_i_live
+- buy_pizza
+- request_pizza_form
+entities:
+- place
+- name
+- pizza_size
+- pizza_type
+slots:
+  name:
+    type: any
+    mappings:
+    - type: from_entity
+      entity: name
+  location:
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: from_entity
+      entity: place
+  pizza_size:
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: from_entity
+      entity: pizza_size
+  pizza_type:
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: from_entity
+      entity: pizza_type
+forms:
+  simple_pizza_form:
+    required_slots:
+      - pizza_size
+      - pizza_type
+responses:
+  utter_greet:
+  - text: Hey {name}! How are you?
+    buttons:
+    - title: great
+      payload: /mood_great
+    - title: bad
+      payload: /mood_bad
+  utter_cheer_up:
+  - text: 'Here is something to cheer you up:'
+    image: https://i.imgur.com/nGF1K8f.jpg
+  utter_did_that_help:
+  - text: Did that help you?
+  utter_happy:
+  - text: Great, carry on!
+  utter_goodbye:
+  - text: Bye
+  utter_iamabot:
+  - text: I am a bot, powered by Rasa.
+  utter_pizza_slots:
+  - text: I will order a {pizza_size} {pizza_type} pizza.
+  utter_ask_pizza_size:
+  - text: What size would you like your pizza to be?
+  utter_ask_pizza_type:
+  - text: What kind of pizza would you like to buy?
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
+actions:
+- action_time_difference
+- action_remember_where
+- action_tell_time
+- utter_pizza_slots
+- utter_submit
+- validate_simple_pizza_form
